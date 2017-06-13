@@ -1,0 +1,19 @@
+{
+  "name": "rss-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "db-migrate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "db-migrate": "0.10.0-beta.20",
+    "db-migrate-sqlite3": "0.2.1",
+    "express": "4.15.3",
+    "sqlite3": "3.1.8"
+  }
+}
