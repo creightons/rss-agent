@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "db-migrate",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,11 @@
     "db-migrate": "0.10.0-beta.20",
     "db-migrate-sqlite3": "0.2.1",
     "express": "4.15.3",
+    "morgan": "1.8.2",
+    "pug": "2.0.0-rc.2",
     "sqlite3": "3.1.8"
+  },
+  "devDependencies": {
+    "morgan": "1.8.2"
   }
 }
