@@ -23,6 +23,10 @@ app.get('/', (req, res) => {
         });
 });
 
+app.get('/feed-form', (req, res) => {
+    return res.status(200).render('add-feed-form');
+});
+
 app.listen(process.env.PORT || 3000, () => {
     console.log('Server is live...');
 });

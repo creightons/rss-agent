@@ -1,14 +1,10 @@
-doctype html
+extends layout.pug
 
-html
-    head
-        meta(charset='uft-8')
-        title RSS-AGENT
+block body
+    a(href='/feed-form') Add form
+    h1 Welcome to the feed-list
 
-    body
-        h1 Welcome to the feed-list
-
-        ul
-            each feedData in feeds
-                a(href = feedData.url)
-                    li= feedData.name
+    ul
+        each feedData in feeds
+            a(href = feedData.url)
+                li= feedData.name
