@@ -29,33 +29,7 @@ app.get('/feed-form', (req, res) => {
 });
 
 app.get('/test-feed', (req, res) => {
-    const feedStream = processFeed(req, 'https://www.npr.org/rss/podcast.php?id=510307');
-
-    feedStream.pipe(res);
-
-    /*
-    feedStream.pipe(res);
-
-    feedStream.on('data', function(data) {
-        res.write(data);
-    });
-
-    feedStream.on('readable', function() {
-        const stream = this;
-        let item;
-        while(item = stream.read()) {
-            console.log('here');
-            res.write(item);
-        }
-        res.end();
-    });
-
-    feedStream.on('end', function() {
-        res.end();
-    });
-
-    req.pipe(feedStream).pipe(res);
-    */
+    const feedStream = processFeed(req, res, 'https://www.npr.org/rss/podcast.php?id=510307');
 });
 
 app.listen(process.env.PORT || 3000, () => {

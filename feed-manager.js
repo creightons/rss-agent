@@ -1,7 +1,7 @@
 const FeedParser = require('feedparser');
 const request = require('request');
 
-function processFeed(req, url) {
+function processFeed(req, res, url) {
     const feedRequest = request(url);
     const feedparser = new FeedParser();
 
@@ -9,6 +9,7 @@ function processFeed(req, url) {
 
     feedRequest.on('error', function(err) {
         console.log('request error:', err);
+        res.status(500).send('error');
     });
 
     feedRequest.on('response', function(res) {
@@ -24,21 +25,25 @@ function processFeed(req, url) {
 
     feedparser.on('error', function(err) {
         console.log('feedparser error:', err);
+        res.status(500).send('error');
     });
 
-    /*
     feedparser.on('readable', function() {
         const stream = this;
         const meta = stream.meta;
         let item;
+        let itemString;
 
         while(item = stream.read()) {
             console.log(item);
+            itemString = JSON.stringify(item);
+            res.write(itemString);
         }
     });
-    */
 
-    return feedparser;
+    feedparser.on('end', function() {
+        res.end();
+    });
 }
 
 
