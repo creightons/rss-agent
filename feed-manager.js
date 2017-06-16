@@ -23,6 +23,11 @@ function processFeed(req, res, url) {
         }
     });
 
+    feedRequest.on('data', function(chunk) {
+        let item;
+        console.log('chunk = ', chunk.toString());
+    });
+
     feedparser.on('error', function(err) {
         console.log('feedparser error:', err);
         res.status(500).send('error');
@@ -35,7 +40,7 @@ function processFeed(req, res, url) {
         let itemString;
 
         while(item = stream.read()) {
-            console.log(item);
+            //console.log(item);
             itemString = JSON.stringify(item);
             res.write(itemString);
         }

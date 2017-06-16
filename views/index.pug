@@ -5,6 +5,6 @@ block body
     h1 Welcome to the feed-list
 
     ul
-        each feedData in feeds
-            a(href = feedData.url)
+        each feedData in context
+            a(href = feedData.href)
                 li= feedData.name
