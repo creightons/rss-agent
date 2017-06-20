@@ -23,9 +23,16 @@ function processFeed(req, res, url) {
         }
     });
 
-    feedRequest.on('data', function(chunk) {
-        let item;
-        console.log('chunk = ', chunk.toString());
+    let count = 0;
+    let enclosures = [];
+    feedparser.on('data', function(chunk) {
+        count += 1;
+        console.log(`count = ${count}`, "\n", Object.keys(chunk), chunk.enclosures);
+        enclosures.push(chunk.enclosures);
+    });
+
+    feedparser.on('end', function() {
+        console.log('enclosures = ', enclosures);
     });
 
     feedparser.on('error', function(err) {
@@ -40,7 +47,6 @@ function processFeed(req, res, url) {
         let itemString;
 
         while(item = stream.read()) {
-            //console.log(item);
             itemString = JSON.stringify(item);
             res.write(itemString);
         }

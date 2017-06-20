@@ -14,22 +14,22 @@ app.set('views', './views');
 app.use(morgan());
 
 app.get('/', (req, res) => {
-    knex.select('name', 'id').from('feedlist')
+  res.status(200).render('index');
+});
+
+app.get('/rss-urls', (req, res) => {
+  knex.select('name', 'id').from('feedlist')
         .then(rows => {
-            const context = rows.map(row => {
-                return { href: `/show-feed/${row.id}`, name: row.name };
-            });
-            return res.status(200).render('index', { context });
+            return res.status(200).send(rows); // [ { id: , name:, }, ... ]
         })
         .catch(err => {
             console.log(err);
-            res.status(500).send('Error');
+            res.status(500).send(err);
         });
 });
 
-app.get('/feed-form', (req, res) => {
-    return res.status(200).render('add-feed-form');
-});
+
+app.use('/public', express.static('./public'));
 
 app.get('/test-feed', (req, res) => {
     const feedStream = processFeed(req, res, 'https://www.npr.org/rss/podcast.php?id=510307');

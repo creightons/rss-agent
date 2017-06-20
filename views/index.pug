@@ -1,10 +1,5 @@
 extends layout.pug
 
 block body
-    a(href='/feed-form') Add form
-    h1 Welcome to the feed-list
-
-    ul
-        each feedData in context
-            a(href = feedData.href)
-                li= feedData.name
+  div#app
+  script(src='/public/main.bundle.js')
