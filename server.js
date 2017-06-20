@@ -17,6 +17,19 @@ app.get('/', (req, res) => {
   res.status(200).render('index');
 });
 
+app.get('/rss/:id', (req, res) => {
+    knex.select('url').from('feedlist').where('id', req.params.id)
+        .then(rows => {
+            const url = rows[0].url;
+            return processFeed(req, res, url);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send(err);
+        });
+});
+
+
 app.get('/rss-urls', (req, res) => {
   knex.select('name', 'id').from('feedlist')
         .then(rows => {
