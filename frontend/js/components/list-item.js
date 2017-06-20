@@ -1,10 +1,10 @@
 import React from 'react';
-import { get } from '../utils';
+import { fetchStream } from '../utils';
 
 export default function ListItem({ id, name }) {
     function clickHandler() {
         const url = `/rss/${id}`;
-        get(url)
+        fetchStream(url)
             .then(data => console.log(data))
             .catch(err => console.log(err));
     }
